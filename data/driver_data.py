@@ -1,45 +1,62 @@
-from data.strings import CapabilitiesStrings as Capabilities
 from data.strings import AndroidString as Android
 from data.strings import IosStrings as Ios
-from data.strings import ServerStrings as Server
-
-
-# In this file we can prepare both our capabilities set to use them in our driver
-class GeneralData:
-    APPIUM_LOCAL_HOST_URL = Server.server_url
 
 
 class AndroidDriverData:
-    ANDROID_DEVICE_NAME = Android.device_name
-    APP_PATH = Android.app_path
-    APP_PACKAGE = Android.app_package
-    APP_ACTIVITY = Android.app_activity
-    AUTOMATION_NAME = Android.automation_name
 
-    def android_caps(self, platform, version=Android.latest):
-        desired_caps = {
-            Capabilities.platform_name: platform,
-            Capabilities.platform_version: version,
-            Capabilities.device_name: self.ANDROID_DEVICE_NAME,
-            Capabilities.app_package: self.APP_PACKAGE,
-            Capabilities.app_activity: self.APP_ACTIVITY,
-            Capabilities.clear_system_files: True,
-            Capabilities.automation_name: self.AUTOMATION_NAME,
-        }
+    @staticmethod
+    def android_caps(version=Android.latest):
+        desired_caps = dict(
+            platformName=Android.android,
+            app='path/to/file',
+            platformVersion=version,
+            deviceName=Android.device_name,
+            appPackage=Android.app_package,
+            clearSystemFiles=True,
+            automationName=Android.automation_name,
+            autoGrantPermissions=True,
+            avd=Android.device_name,
+            skipDeviceInitialization=False,
+            audioPlayback=False,
+            skipLogcatCapture=False,
+            autoAcceptAlerts=True,
+            wdaLaunchTimeout=120000,
+            wdaStartupRetries=4,
+            newCommandTimeout=180,
+            fullReset=False,
+            noReset=True,
+            shouldTerminateApp=True,
+            avdLaunchTimeout=300000,
+            avdReadyTimeout=300000,
+            isHeadless=False
+        )
         return desired_caps
 
 
 class IOSDriverData:
-    APP_PATH = Ios.app_path
-    IOS_DEVICE_NAME = Ios.device_name
-    AUTOMATION_NAME = Ios.automation_name
-
-    def ios_caps(self, platform, version=Ios.latest):
-        desired_caps = {
-            Capabilities.platform_name: platform,
-            Capabilities.platform_version: version,
-            Capabilities.device_name: self.IOS_DEVICE_NAME,
-            Capabilities.automation_name: self.AUTOMATION_NAME,
-            Capabilities.app: self.APP_PATH
-        }
+    @staticmethod
+    def ios_caps(version):
+        desired_caps = dict(
+            platformName=Ios.ios,
+            platformVersion=version,
+            deviceName=Ios.device_name,
+            automationName=Ios.automation_name,
+            app='path/to/file',
+            showXcodeLog=True,
+            sendKeyStrategy='grouped',
+            elementResponseAttributes=True,
+            isAutomationEnabled=True,
+            autoAcceptAlerts=True,
+            autoDismissAlerts=False,
+            connectHardwareKeyboard=True,
+            wdaLaunchTimeout=120000,
+            wdaStartupRetries=4,
+            newCommandTimeout=180,
+            fullReset=False,
+            noReset=True,
+            shouldTerminateApp=True,
+            launchTimeout=20000,
+            showIOSLog=True,
+            isHeadless=False
+        )
         return desired_caps

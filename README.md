@@ -1,49 +1,56 @@
-<h1> Simple Python and Appium PageObject (ScreenObject) example </h1>
+# Automation Mobile Framework
 
+## About
+An automation framework for Android / iOS Applications built with Appium and Python.
 
-## Description
-
-* Fairly simple PageObject pattern. Include
-  - PyTest
-  - Allure reports
-  - Logging
-* Easy to maintain, no unnecessary 3-rd party packages/wrappers
-* Just clone it and put your app/locators/logic
-  
-
-
-## How To Use
-
-To clone and run this application, you'll need [Git](https://git-scm.com), [Pipenv](https://github.com/pypa/pipenv), [Appium](https://appium.io), and Android/iOS simulator or real device.
+## Requires
+* Homebrew:
+>     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 
+* NPM & Node:
+>     brew install node
 ```bash
-# Clone this repository
-$ git clone https://github.com/betaraybill/PythonAppiumExamplePO.git
-
-# Go into the repository
-$ cd PythonAppiumExamplePO
-
-# Install dependencies
-$ pipenv install
-
-# After that, change the code, according to your app needs, and run:
-
-# android
-$ pipenv run py.test -s --os=android --os_version=10 test_test.py
-
-# ios
-$ pipenv run py.test -s --os=android --os_version=10 test_test.py
-
-
-# If you want to have allure report and logs
-$ pipenv run py.test --log-cli-level=INFO -s --alluredir=/path/to/desired/alluredir --os=android --os_version=10 test_test.py
-
-# To get allure report
-$ allure generate --clean allure/ -o allure/reports && allure open allure/reports
-
-
-# If for some reason you don't like Allure, you can use Pytest built-in reports, to do this - add --html=report.html
-pipenv run py.test --log-cli-level=INFO -s --reruns 2 --html=report.html --os=android --os_version=10 test_test.py
-
-# And finally, if you have flaky tests, you can run tests with rerun option. In this case, test will run N times if it fails. Usually, 3 is fair enough.
-pipenv run py.test --log-cli-level=INFO -s --reruns 2 --html=report.html --reruns 5 --os=android --os_version=10 test_test.py 
+    node -v
 ```
+```bash
+    npm -v
+```
+* ADB command line tool
+* Appium console:
+>     npm install -g appium@next
+>     npm install -g appium-doctor
+>     appium driver install uiautomator2
+>     appium driver install xcuitest
+```bash
+    appium-doctor
+```
+* [**Appium desktop**](https://github.com/appium/appium-desktop/releases)
+* [**Appium inspector**](https://github.com/appium/appium-inspector/releases)
+
+
+## Install environment for running tests on Android devices:
+* [**Android Studio**](https://developer.android.com/studio)
+* [**Java**](https://www.oracle.com/java/technologies/downloads/#jdk18-mac)
+
+## Install environment for running tests on iOS devices:
+* XCode
+* Carthage
+>     brew install carthage
+
+## How to Install and Run the Project:
+1. Install Python version 3.10
+2. Install pipenv using the command:
+>     pip install pipenv
+3. Run tests with command:
+>    - pipenv run py.test --log-cli-level=INFO -s --reruns 1 --html=test-reports/report.html --os=android --os_version=12 tests/shared/test_login.py
+>    - pipenv run py.test --log-cli-level=INFO -s --reruns 1 --html=test-reports/report.html --os=ios --os_version=15.5 tests/shared/test_login.py
+4. Run tests with markers:
+>- pipenv run py.test --log-cli-level=INFO -m "not ios" -s --reruns 1 --html=test-reports/report.html --os=android --os_version=12
+>- pipenv run py.test --log-cli-level=INFO -m "ios" -s --reruns 1 --html=test-reports/report.html --os=ios --os_version=15.2
+>- pipenv run py.test --log-cli-level=INFO -m "android_ios" -s --reruns 1 --html=test-reports/report.html --os=ios --os_version=15.2
+
+## Useful commands:
+* [**ADB commands**](https://developer.android.com/studio/command-line/adb)
+>     adb devices
+>     emulator -list-avds
+>     cd ~/Library/Android/sdk/emulator && ./emulator -avd device_name
+>     kill -9 $(lsof -t -i:4723)

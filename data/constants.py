@@ -1,5 +1,12 @@
-# Simple class with all constants, like default wait time, etc
+import os
 
 
 class TestConst:
-    wait_time = 15
+    WAIT_TIME = 30
+    OS = os.getenv('os').lower()
+
+
+class ByTypesEnum:
+    ID = 'id'
+    XPATH = 'xpath'
+    ACCESSIBILITY_ID = 'accessibility id'
